@@ -1,4 +1,5 @@
 import express = require("express");
+import path = require('path');
 import {AccessControl} from '../common/access-control';
 import {DefaultRouter} from '../routes/defaultRouter';
 
@@ -14,6 +15,7 @@ class ExpressApp {
         this.defaultRouter = new DefaultRouter();
         this.registerMiddleware();
         this.registerRoutes();        
+        this.app.use(express.static(path.join(__dirname, '../../assets')));
         this.app.listen(port, ()=>console.log(`server listening on port ${port}`));
     }
 
