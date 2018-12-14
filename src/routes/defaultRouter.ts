@@ -8,7 +8,6 @@ export class DefaultRouter {
     constructor() {
         this.router.get('/', this.helloWorld);
         this.calculatorRouter.get('/calc/:first/:second', this.calculate);
-       
     }
 
 
