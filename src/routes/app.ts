@@ -21,9 +21,11 @@ class ExpressApp {
 
     registerRoutes(): any {
         this.app.use('/', this.defaultRouter.router);
+        this.app.use(this.defaultRouter.calculatorRouter);
     }
     registerMiddleware(): any {
         this.app.use(this.accessControl.addHeaders);
+        this.app.use('/calc/', (req,res,next)=>{console.log('calc'); next();});
     }
 
 

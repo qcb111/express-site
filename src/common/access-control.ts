@@ -9,6 +9,3 @@ export class AccessControl {
         next();
     }
 }
-
-
-// export default new AccessControl().addHeaders;
