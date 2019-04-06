@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>corsola's site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $(button).click(function(){
+          let name = $(input).val();
+          $.ajax({
+            url: "/auth",
+            method: "POST",
+            data: `{name: ${name}}`,
+            success: function(result){
+              $(document).html(result);
+            }
+          })
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h3>Who are you?</h3>
+    <form action="/auth" method="POST">
+      <input type="text" name="name" value="name" />
+      <button type="submit">submit!</button>
+    </form>
+  </body>
+</html>
