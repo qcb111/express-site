@@ -1,0 +1,25 @@
+<div *ngIf="showWelcome" ng-cloak>
+    <h1>Hello, 猫咪！</h1>
+    <img src="./asset/mua.gif" alt="love you!" width="300">
+    <p>This is a very fantastic website created by 胖白!</p>
+
+    <p>A new feature is online! Try the to-do List!</p>
+    <p></p>
+
+    <p></p>
+
+    <p>For now this website has a very powerful calculator which can calculate the sum of two numbers for you!</p>
+    <p>How to use the calculator? Just append your input numbers to the url!</p>
+    <p>For example: try to visit "https://corsola001.chinacloudsites.cn/calc/4/5"</p>
+
+</div>
+<div *ngIf="showWelcome" class="grid grid-pad" ng-cloak>
+    <h3 class="features-title">Current Features</h3>
+    <a *ngFor="let feature of enabledFeatures" class="col-1-4">
+        <div class="module hero" (click)="changeShowing(feature)">
+            <h4>{{feature}}</h4>
+        </div>
+    </a>
+</div>
+
+<app-to-do-list *ngIf="showTodoList" ng-cloak></app-to-do-list>

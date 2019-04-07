@@ -1,0 +1,32 @@
+<div class="content">
+  <div class="time">
+    <table style="width: 100%;height: 100%;">
+      <tr>
+        <td id='presentTime' style="vertical-align: bottom; text-align: center; font-size: 80px;color: snow;">
+          {{displayTime}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="greeting">
+    <table style="width: 100%;height: 100%;">
+      <tr>
+        <td id='presentGreetings' style="vertical-align: top; text-align: center; font-size: 60px;color: snow;" (click)="addItem(pending)">
+          {{displayGreetings}}, 猫咪!
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="footElement">
+    <div class='todoList' *ngFor="let item of todoList">
+      <div class='todoItem' >
+        <div class="checkboxes"><input class='checkbox1' type="checkbox" name="checkbox1" id="checkbox1">
+          {{item}}
+        </div>
+        <div class="closeicon" (click)="removeItem(item)">x</div>
+      </div>
+    </div>
+    <div class="inputItem" id='inputItem'><input name="input1" id='input1' type="text" placeholder="input" [(ngModel)]="pending"
+        style="background-color: transparent; border-color: transparent;color:gray;height: 80%;">
+    </div>
+  </div>
+</div>

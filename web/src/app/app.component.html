@@ -1,0 +1,11 @@
+
+<div *ngIf="shouldShowLogin()">
+  <h1>Who are you?</h1>
+
+  <input [(ngModel)]="name" placeholder="name">
+  <button (click)="sendAuth()">Submit!</button>
+</div>
+
+<app-public-welcome *ngIf="shouldShowPublic()"></app-public-welcome>
+<app-private-welcome *ngIf="shouldShowPrivate()"></app-private-welcome>
+<app-contact-author></app-contact-author>
