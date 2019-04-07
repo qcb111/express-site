@@ -1,3 +1,4 @@
+import express = require('express');
 
 export class CommonMiddleware {
     public addAccessControlHeaders = (req, res, next) => {
@@ -9,9 +10,10 @@ export class CommonMiddleware {
         next();
     }
 
-    public logRequestInfo (req, res, next) {
+    public logRequestInfo (req: express.Request, res: express.Response, next: express.NextFunction) {
         console.log("Request URL: ", req.originalUrl);
         console.log("Request method: ", req.method);
         next();
+        console.log(`Response status: ${res.statusCode}`);
     }
 }
