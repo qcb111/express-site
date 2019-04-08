@@ -5,7 +5,7 @@ import { Http, Headers, RequestOptions } from "@angular/http";
 const httpOptions = {
   headers: new Headers({ 'Content-Type': 'application/json' })
 };
-const baseUrl: string = 'http://localhost:9090';
+const baseUrl: string = 'https://corsola001.chinacloudsites.cn/';
 
 
 @Component({
@@ -14,7 +14,7 @@ const baseUrl: string = 'http://localhost:9090';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  name = 'anonymous';
+  name: string;
  
   private authState: number;
  
@@ -29,7 +29,7 @@ export class AppComponent {
     let body = {
       name: this.name
     };
-    this.http.post(`http://localhost:9090/auth`, body, httpOptions).subscribe(res=>{
+    this.http.post(`${baseUrl}/auth`, body, httpOptions).subscribe(res=>{
       let j = res.json();
       this.authState = j.state;
     });

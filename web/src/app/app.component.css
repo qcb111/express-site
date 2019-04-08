@@ -38,6 +38,8 @@ button {
   font-size: 1em;
   padding-left: .4em;
   margin-left: 20px;
+  color: white;
+  background-color: #607D8B;
 }
 app-contact-author {
   position: absolute;
