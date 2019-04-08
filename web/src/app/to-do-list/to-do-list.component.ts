@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Http, Headers, RequestOptions } from "@angular/http";
+const httpOptions = {
+  headers: new Headers({ 'Content-Type': 'application/json' })
+};
+
+const baseUrl = "https://corsola001.chinacloudsites.cn/todolist";
 
 @Component({
   selector: 'app-to-do-list',
@@ -8,20 +14,24 @@ import { Component, OnInit } from '@angular/core';
     '(document:keypress)': 'handleKeyboardEvent($event)'
   }
 })
+
 export class ToDoListComponent implements OnInit {
 
   displayTime: string;
   displayGreetings: string;
-  todoList: string[] = [];
+  todoList: Item[] = [];
   pending: string;
-  constructor() { }
+  constructor(private http: Http) { }
 
   ngOnInit() {
     this.updateTime();
     setInterval(() => {
       this.updateTime();
     }, 30000);
-    this.todoList.push(`Learn German!`);
+
+    this.http.get(baseUrl).subscribe((data)=>{
+      this.todoList = data.json();
+    })
   };
 
   updateTime(): void {
@@ -49,14 +59,21 @@ export class ToDoListComponent implements OnInit {
 
   addItem(item: string) {
     if (this.pending && this.pending.length > 0) {
-      this.todoList.push(item);
-      this.pending = "";
+      let i: Item = {
+        content: item,
+        isFinished: false
+      };
+      this.http.put(baseUrl, i).subscribe(()=>{
+        this.todoList.push(i);
+        this.pending = "";  
+      });
     }
-
   };
 
   removeItem(item: string) {
-    this.todoList = this.todoList.filter((i) => i !== item);
+    this.http.delete(`${baseUrl}/${item}`).subscribe((data)=>{
+      this.todoList = this.todoList.filter((i) => i.content !== item);
+    });
   }
 
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -64,4 +81,10 @@ export class ToDoListComponent implements OnInit {
       this.addItem(this.pending);
     }
   }
+}
+
+interface Item{
+  content: string;
+  isFinished: boolean;
+  order?: number;
 }

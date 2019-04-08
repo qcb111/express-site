@@ -20,9 +20,9 @@
     <div class='todoList' *ngFor="let item of todoList">
       <div class='todoItem' >
         <div class="checkboxes"><input class='checkbox1' type="checkbox" name="checkbox1" id="checkbox1">
-          {{item}}
+          {{item.content}}
         </div>
-        <div class="closeicon" (click)="removeItem(item)">x</div>
+        <div class="closeicon" (click)="removeItem(item.content)">x</div>
       </div>
     </div>
     <div class="inputItem" id='inputItem'><input name="input1" id='input1' type="text" placeholder="input" [(ngModel)]="pending"

@@ -5,15 +5,19 @@ import bodyParser = require("body-parser");
 import {CommonMiddleware} from './server/common/middleware';
 import {calculate} from './server/handlers/calculator';
 import {auth} from './server/handlers/auth';
-import {helloWorld} from './server/handlers/hello'
+import {helloWorld} from './server/handlers/hello';
+import TodolistController from './server/controllers/todolistController';
 const port = process.env.PORT || 9090;
 
 class ExpressApp {
     public app: express.Application;
     private middleware: CommonMiddleware;
+    private controllers: any[];
     constructor() {
         this.app = express();
         this.middleware = new CommonMiddleware();
+        this.controllers = new Array();
+        this.controllers.push(new TodolistController());
         this.registerStaticFiles();
         this.registerMiddleware();
         this.registerEndPoints();        
@@ -28,6 +32,9 @@ class ExpressApp {
         this.app.get('/', helloWorld);
         this.app.get('/calc/:first/:second', calculate);
         this.app.post('/auth', auth);
+        this.controllers.forEach(controller => {
+            this.app.use('/', controller.router);
+        });
     }
     private registerMiddleware(): any {
         this.app.use(bodyParser.urlencoded({ extended: false }));
