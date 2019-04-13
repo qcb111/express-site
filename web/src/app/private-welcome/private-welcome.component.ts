@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./private-welcome.component.css']
 })
 export class PrivateWelcomeComponent implements OnInit {
-  enabledFeatures: string[] = ['todolist'];
+  enabledFeatures: string[] = ['todolist', 'germanWordsQuiz'];
 
   showing: string;
   get showWelcome(): boolean{
     return 'welcome' === this.showing;
   }
-  get showTodoList(): boolean{
-    return 'todolist' === this.showing;
+  showFeature(name: string): boolean{
+    return name === this.showing;
   }
   constructor() { }
 

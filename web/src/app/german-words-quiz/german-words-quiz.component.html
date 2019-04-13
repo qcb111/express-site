@@ -1,0 +1,14 @@
+<h2>Take a Quiz!</h2>
+
+<div class="quiz-title">
+<h5 class="title article">Definite Article <br> (nominative singular)</h5>
+<h5 class="title word">Noun</h5>
+<div class="title placeholder-for-marker"></div>
+</div>
+<div *ngFor="let word of words" class="quiz-list">
+  <input placeholder="der" class="quiz-article">
+  <p class="quiz-word">{{word.word}}</p>
+  <img class="quiz-marker" src="./assets/questionMark.jpg" width="200">
+  <!-- <img class="quiz-marker" src="./assets/PeachCat-kiss.gif" width="200">
+  <img class="quiz-marker" src="./assets/kitty-sad.gif" width="200"> -->
+</div>

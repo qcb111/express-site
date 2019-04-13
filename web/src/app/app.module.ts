@@ -14,6 +14,7 @@ import { PublicWelcomeComponent } from './public-welcome/public-welcome.componen
 import { PrivateWelcomeComponent } from './private-welcome/private-welcome.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { ContactAuthorComponent } from './contact-author/contact-author.component';
+import { GermanWordsQuizComponent } from './german-words-quiz/german-words-quiz.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { ContactAuthorComponent } from './contact-author/contact-author.componen
     PublicWelcomeComponent,
     PrivateWelcomeComponent,
     ToDoListComponent,
-    ContactAuthorComponent
+    ContactAuthorComponent,
+    GermanWordsQuizComponent
   ],
   bootstrap: [ AppComponent ]
 })
