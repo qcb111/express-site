@@ -61,11 +61,10 @@ export class GermanWordsQuizComponent implements OnInit {
         this.shouldShowWarning = false;
         this.getNewQuiz();
       });
+    } else {
+      this.showWarning(`Are you sure you want to delete this word? Click again to confirm.`);
+      quiz.status = 'pending-delete-confirm';  
     }
-
-    this.showWarning(`Are you sure you want to delete this word? Click again to confirm.`);
-    quiz.status = 'pending-delete-confirm';
-    return;
   }
 
   public submitNewWord(){
