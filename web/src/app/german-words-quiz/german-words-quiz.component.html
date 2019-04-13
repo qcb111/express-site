@@ -1,14 +1,25 @@
 <h2>Take a Quiz!</h2>
-
-<div class="quiz-title">
-<h5 class="title article">Definite Article <br> (nominative singular)</h5>
+<h5>Fill the missing definite articles (nominative singular)</h5>
+<!-- <div class="quiz-title">
+<h6 class="title article">Definite Article <br> (nominative singular)</h6>
 <h5 class="title word">Noun</h5>
 <div class="title placeholder-for-marker"></div>
-</div>
-<div *ngFor="let word of words" class="quiz-list">
-  <input placeholder="der" class="quiz-article">
-  <p class="quiz-word">{{word.word}}</p>
-  <img class="quiz-marker" src="./assets/questionMark.jpg" width="200">
+</div> -->
+<div *ngFor="let quiz of currentQuiz" class="quiz-list">
+  <input [(ngModel)]="quiz.article" placeholder="Artikel" class="quiz-article">
+  <h3 class="quiz-word">{{quiz.data.word}}</h3>
+  <img class="quiz-marker" (click)="quizMarkerOnClick(quiz)" src="./assets/{{quiz.img}}">
+  <button (click)="deleteWord(quiz)" class="quiz-delete">x</button>
   <!-- <img class="quiz-marker" src="./assets/PeachCat-kiss.gif" width="200">
   <img class="quiz-marker" src="./assets/kitty-sad.gif" width="200"> -->
 </div>
+
+<button (click)="getNewQuiz()" class="btn-next-round">Next Round!</button>
+
+<div class="add-word">
+  <input [(ngModel)]="newArticle" placeholder="Artikel" class="new-article">
+  <input [(ngModel)]="newWord" placeholder="Nomen" class="new-word">
+  <button (click)="submitNewWord()" class="new-submit">Submit!</button>  
+</div>
+
+<h4 *ngIf="shouldShowWarning" class="warning">{{warning}}</h4>

@@ -20,6 +20,8 @@
   }
   h4 {
     position: relative;
+    text-align: center;
+    font-size: large;
   }
   .grid {
     margin: 0;
@@ -42,8 +44,9 @@
     color: #607d8b;
   }
   .grid-pad {
-    width: 25%;
     padding: 10px 0;
+    min-width: 300px;
+    max-width: 600px;
   }
   .grid-pad > [class*='col-']:last-of-type {
     padding-right: 20px;
@@ -64,4 +67,8 @@
 .features-title {
     position: relative;
     text-align: center;
+}
+
+.hero{
+  font-size: 30px;
 }

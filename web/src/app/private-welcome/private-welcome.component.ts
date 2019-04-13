@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./private-welcome.component.css']
 })
 export class PrivateWelcomeComponent implements OnInit {
-  enabledFeatures: string[] = ['todolist', 'germanWordsQuiz'];
+  enabledFeatures: Feature[] = [
+    {name:'todolist', displayName: "To-do List"},
+    {name:'germanWordsQuiz', displayName: "German Quiz!"}
+  ];
 
   showing: string;
   get showWelcome(): boolean{
@@ -21,11 +24,17 @@ export class PrivateWelcomeComponent implements OnInit {
     this.showing = 'welcome';
   }
 
-  changeShowing(featureName: string): void{
-    if(this.enabledFeatures.indexOf(featureName)<0){
+  changeShowing(feature: Feature): void{
+    if(this.enabledFeatures.map(f=>f.name).indexOf(feature.name)<0){
       this.showing = 'welcome';
       return;
     }
-    this.showing = featureName;
+    this.showing = feature.name;
   }
+}
+
+
+class Feature{
+  name: string;
+  displayName: string;
 }

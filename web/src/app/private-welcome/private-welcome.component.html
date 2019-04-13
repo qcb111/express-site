@@ -1,6 +1,6 @@
 <div *ngIf="showWelcome" ng-cloak>
     <h1>Hello, 猫咪！</h1>
-    <img src="./asset/mua.gif" alt="love you!" width="300">
+    <img src="./assets/mua.gif" alt="love you!" width="300">
     <p>This is a very fantastic website created by 胖白!</p>
 
     <p>A new feature is online! Try the German Quiz!</p>
@@ -16,9 +16,7 @@
 <div *ngIf="showWelcome" class="grid grid-pad" ng-cloak>
     <h3 class="features-title">Current Features</h3>
     <a *ngFor="let feature of enabledFeatures" class="col-1-4">
-        <div class="module hero" (click)="changeShowing(feature)">
-            <h4>{{feature}}</h4>
-        </div>
+        <div class="module hero" (click)="changeShowing(feature)">{{feature.displayName}}</div>
     </a>
 </div>
 
