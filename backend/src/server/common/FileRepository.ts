@@ -14,8 +14,10 @@ class FileRepository<T>{
         if (fs.existsSync(this.filename)) {
             let fileContent = fs.readFileSync(this.filename, 'utf8');
             this.collection = JSON.parse(fileContent);
+            console.log(`${this.filename} already exists`)
         } else {
             this.collection = [];
+            this.save();
         }
 
     };
@@ -53,6 +55,7 @@ class FileRepository<T>{
 
     private save(): void{
         fs.writeFileSync(this.filename, JSON.stringify(this.collection));
+        console.log(`${this.filename} saved`);
     }
 }
 
