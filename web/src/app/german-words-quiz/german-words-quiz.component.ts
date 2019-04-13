@@ -8,28 +8,7 @@ const httpOptions = {
 
 const baseUrl = "https://corsola001.chinacloudsites.cn/words";
 
-const list: Array<WordsAndGender> = [
-  {
-    "word": "Orange",
-    "gender": "f",
-    "reviewState": {
-      "correctTimes": 1,
-      "wrongTimes": 2,
-      "isArchived": false
-    }
-  },
-  {
-    "word": "Milch",
-    "gender": "m",
-    "reviewState": {
-      "correctTimes": 1,
-      "wrongTimes": 2,
-      "isArchived": false
-    }
-  }
-];
-
-const numberOfQuiz = 2;
+const numberOfQuiz = 3;
 
 @Component({
   selector: 'app-german-words-quiz',
@@ -59,7 +38,6 @@ export class GermanWordsQuizComponent implements OnInit {
   }  
 
   public quizMarkerOnClick(quiz: Quiz){
-    console.log(`${quiz.data.word}, ${this.getNominativeSingularArticle(quiz.data.gender)}`)
     if(quiz.status!='pending'){
       return;
     }
@@ -100,22 +78,21 @@ export class GermanWordsQuizComponent implements OnInit {
       return;
     }
 
-    if(!this.warning || this.warning.indexOf('Are you sure to overwrite the record') > 0){
+    if(!this.warning || this.warning.indexOf(`${this.newWord} already exists. Are you sure to overwrite the record?`) < 0){
+      this.http.get(`${baseUrl}/${this.newWord}`).subscribe(data=>{
+        let words = data.json();
+        if(words.length > 0){
+          this.showWarning(`${this.newWord} already exists. Are you sure to overwrite the record? Click again to confirm.`);
+          return;        
+        } else {
+          this.createNewRecord(gender);
+        }
+      });
+    } else {
       this.createNewRecord(gender);
       this.shouldShowWarning = false;
       this.warning = "";
-      return;
-    }
-
-    this.http.get(`${baseUrl}/${this.newWord}`).subscribe(data=>{
-      let words = data.json();
-      if(words.length > 0){
-        this.showWarning(`${this.newWord} already exists. Are you sure to overwrite the record? Click again to confirm.`);
-        return;        
-      } else {
-        this.createNewRecord(gender);
-      }
-    });    
+    }  
   }
 
 
