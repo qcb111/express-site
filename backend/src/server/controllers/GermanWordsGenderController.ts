@@ -21,14 +21,23 @@ class GermanWordsGenderController {
 
     public intializeRoutes() {
         this.router.get(this.path, this.getAll);
+        this.router.get(`${this.path}/:word/`, this.getOne);
         this.router.post(this.path, this.addItem);
         this.router.put(`${this.path}/:word/:isCorrect`, this.updateRecord);
+        this.router.delete(this.path, this.deleteItem);
     }
 
     getAll = (request: express.Request, response: express.Response) => {
         let words = this.collection.get(doc=>!doc.reviewState.isArchived);
         response.status(200).json(words);
     };
+
+
+    getOne = (request: express.Request, response: express.Response) => {
+        let word = request.params.word;
+        let words = this.collection.get(doc=>doc.word.toLocaleLowerCase() === word.toLocaleLowerCase());
+        response.status(200).json(words);
+    }
 
     addItem = (request: express.Request, response: express.Response) => {
         let word: string = request.query.word;
@@ -43,6 +52,7 @@ class GermanWordsGenderController {
                 isArchived: false
             } as ReviewState
         } as WordsAndGender;
+        this.collection.delete(doc=>doc.word === word);
         this.collection.insertOne(doc);
         response.status(201).json(doc);
     };
@@ -68,6 +78,17 @@ class GermanWordsGenderController {
 
         this.collection.update((doc)=>doc.word == word, storedWord);
         res.status(200).json(storedWord);
+    };
+
+    deleteItem = (req: express.Request, res: express.Response) => {
+        let word = req.query.word;
+        let count = this.collection.delete(doc=>doc.word === word);
+        if(count === 0) {
+            res.status(404).send();
+        }
+        else{
+            res.status(200).send();
+        }
     }
 
 }
