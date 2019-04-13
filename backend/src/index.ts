@@ -7,6 +7,8 @@ import {calculate} from './server/handlers/calculator';
 import {auth} from './server/handlers/auth';
 import {helloWorld} from './server/handlers/hello';
 import TodolistController from './server/controllers/todolistController';
+import GermanWordsGenderController from './server/controllers/GermanWordsGenderController';
+
 const port = process.env.PORT || 9090;
 
 class ExpressApp {
@@ -16,11 +18,15 @@ class ExpressApp {
     constructor() {
         this.app = express();
         this.middleware = new CommonMiddleware();
+
         this.controllers = new Array();
         this.controllers.push(new TodolistController());
+        this.controllers.push(new GermanWordsGenderController());
+
         this.registerStaticFiles();
         this.registerMiddleware();
         this.registerEndPoints();        
+        
         this.app.listen(port, () => console.log(`server listening on port ${port}`));
     }
 
